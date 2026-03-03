@@ -22,11 +22,12 @@ const initializeApp = async () => {
   }
 };
 
-initializeApp();
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+
+initializeApp().then(() => {
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+});
