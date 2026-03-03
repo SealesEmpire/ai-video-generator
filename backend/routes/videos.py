@@ -5,7 +5,7 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import PurePath
 
-from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, BackgroundTasks, File, Form, HTTPException, Request, UploadFile
 
 from config import ALLOWED_EXTENSIONS, MAX_FILE_SIZE, UPLOADS_DIR
 from models import VideoGenerationRequest, VideoResponse, UserGallery
@@ -49,6 +49,7 @@ async def generate_text_to_video(
 
 @router.post("/generate-image-to-video", response_model=VideoResponse)
 async def generate_image_to_video(
+    request: Request,
     background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     style: str = Form(...),
@@ -56,6 +57,11 @@ async def generate_image_to_video(
     nsfw_enabled: bool = Form(False),
 ):
     """Generate video from uploaded image."""
+    # Early rejection via Content-Length header when available
+    content_length = request.headers.get("content-length")
+    if content_length and int(content_length) > MAX_FILE_SIZE:
+        raise HTTPException(status_code=413, detail="File too large (max 50 MB)")
+
     # Validate content type
     if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="File must be an image")

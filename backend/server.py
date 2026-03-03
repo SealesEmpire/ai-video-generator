@@ -5,10 +5,9 @@ database connection.  Business logic lives in *services/* and route
 handlers live in *routes/*.
 """
 
-import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -66,7 +65,6 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # --- Routers ---
-from fastapi import APIRouter
 api_router = APIRouter(prefix="/api")
 api_router.include_router(health.router)
 api_router.include_router(styles.router)
@@ -92,9 +90,3 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         status_code=exc.status_code,
         content={"error": exc.detail},
     )
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
