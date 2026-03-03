@@ -1,0 +1,30 @@
+# ----- Backend -----
+backend/__pycache__
+backend/*.pyc
+backend/venv
+backend/.venv
+backend/env
+backend/.env
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ----- Frontend -----
+frontend/node_modules
+frontend/build
+frontend/.env
+
+# ----- Common -----
+.git
+.gitignore
+.github
+*.md
+*.log
+.DS_Store
+.vscode
+.idea
+tests
+backend_test.py
+test_result.md
+coverage
+.pytest_cache
+.cache

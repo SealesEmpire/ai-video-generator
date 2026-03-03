@@ -6,7 +6,7 @@ Complete guide to set up the AI Video Generator locally or on cloud platforms.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/ai-video-generator.git
+git clone https://github.com/SealesEmpire/ai-video-generator.git
 cd ai-video-generator
 
 # 2. Backend setup
@@ -144,14 +144,15 @@ yarn start
 **Access the Application:**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8001
-- API Docs: http://localhost:8001/docs
+- Swagger UI: http://localhost:8001/docs
+- ReDoc: http://localhost:8001/redoc
 
 ## 🔍 Verification
 
 ### 1. Backend Health Check
 ```bash
 curl http://localhost:8001/api/
-# Expected: {"message": "Hello World"}
+# Expected: {"status":"healthy","service":"ai-video-generator"}
 ```
 
 ### 2. Database Connection
@@ -442,4 +443,4 @@ if (process.env.REACT_APP_DEBUG) {
 
 ---
 
-**Still having issues? Check our [GitHub Issues](https://github.com/yourusername/ai-video-generator/issues) or create a new one!** 🆘
+**Still having issues? Check our [GitHub Issues](https://github.com/SealesEmpire/ai-video-generator/issues) or create a new one!** 🆘
