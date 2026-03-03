@@ -10,13 +10,13 @@
     "backend": "cd backend && uvicorn server:app --host 0.0.0.0 --port 8001 --reload",
     "frontend": "cd frontend && yarn start",
     "build": "cd frontend && yarn build",
-    "test": "cd backend && python backend_test.py && cd ../frontend && yarn test",
+    "test": "cd frontend && yarn test --watchAll=false && cd .. && python -m pytest tests/ -v",
     "deploy": "npm run build && echo 'Ready for deployment'",
     "setup": "cp backend/.env.example backend/.env && cp frontend/.env.example frontend/.env && echo 'Environment files created. Please edit them with your configuration.'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/ai-video-generator.git"
+    "url": "git+https://github.com/SealesEmpire/ai-video-generator.git"
   },
   "keywords": [
     "ai",
@@ -32,9 +32,9 @@
   "author": "Your Name",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yourusername/ai-video-generator/issues"
+    "url": "https://github.com/SealesEmpire/ai-video-generator/issues"
   },
-  "homepage": "https://github.com/yourusername/ai-video-generator#readme",
+  "homepage": "https://github.com/SealesEmpire/ai-video-generator#readme",
   "devDependencies": {
     "concurrently": "^7.6.0"
   },

@@ -66,7 +66,7 @@ ai-video-generator/
    git commit -m "Initial commit: AI Video Generator with stubbed APIs"
    
    # Add GitHub remote (replace with your username)
-   git remote add origin https://github.com/yourusername/ai-video-generator.git
+   git remote add origin https://github.com/SealesEmpire/ai-video-generator.git
    
    # Push to GitHub
    git push -u origin main
@@ -89,7 +89,7 @@ git add .
 git commit -m "Initial commit: AI Video Generator"
 
 # Push to GitHub (replace with your repo URL)
-git remote add origin https://github.com/yourusername/ai-video-generator.git
+git remote add origin https://github.com/SealesEmpire/ai-video-generator.git
 git push -u origin main
 ```
 
@@ -99,7 +99,7 @@ Once you've pushed to GitHub, anyone can:
 
 1. **Clone and run locally:**
    ```bash
-   git clone https://github.com/yourusername/ai-video-generator.git
+   git clone https://github.com/SealesEmpire/ai-video-generator.git
    cd ai-video-generator
    npm run setup        # Creates .env files
    npm run install-all  # Installs all dependencies
@@ -116,7 +116,7 @@ Once you've pushed to GitHub, anyone can:
 
 After pushing to GitHub, verify:
 
-- [ ] Repository accessible at github.com/yourusername/ai-video-generator
+- [ ] Repository accessible at github.com/SealesEmpire/ai-video-generator
 - [ ] README.md displays correctly on GitHub
 - [ ] All source code files are present
 - [ ] .env.example files are included (not .env files)
@@ -130,7 +130,7 @@ To test your export works:
 
 1. **Local Test:**
    ```bash
-   git clone https://github.com/yourusername/ai-video-generator.git
+   git clone https://github.com/SealesEmpire/ai-video-generator.git
    cd ai-video-generator
    npm run setup
    # Edit .env files with your settings

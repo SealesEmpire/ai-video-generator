@@ -315,30 +315,30 @@ FastAPI automatically generates interactive API documentation at `/docs` (Swagge
 
 ## Summary Table
 
-| # | Category | Priority | Recommendation |
-|---|----------|----------|----------------|
-| 1 | Security | 🔴 Critical | Remove exposed API key from `.env.example` |
-| 2 | Security | 🔴 Critical | Restrict CORS origins |
-| 3 | Security | 🔴 Critical | Implement authentication |
-| 4 | Security | 🔴 Critical | Add rate limiting |
-| 5 | Security | 🔴 Critical | Enforce file upload constraints |
-| 6 | Bug | 🟠 High | Fix broken import in `server.py` |
-| 7 | Bug | 🟠 High | Replace deprecated `datetime.utcnow()` |
-| 8 | Bug | 🟠 High | Handle missing environment variables |
-| 9 | Code Quality | 🟡 Medium | Store background task references |
-| 10 | Code Quality | 🟡 Medium | Add a health check endpoint |
-| 11 | Code Quality | 🟡 Medium | Use consistent error response format |
-| 12 | Code Quality | 🟡 Medium | Replace deprecated `@app.on_event()` |
-| 13 | Code Quality | 🟡 Medium | Separate backend code into modules |
-| 14 | Testing | 🔵 Medium | Add unit tests using `TestClient` |
-| 15 | Testing | 🔵 Medium | Add frontend tests |
-| 16 | Testing | 🔵 Medium | Populate the `tests/` directory |
-| 17 | Performance | 🟢 Low | Add MongoDB indexes |
-| 18 | Performance | 🟢 Low | Enforce pagination limits |
-| 19 | Performance | 🟢 Low | Cache static responses |
-| 20 | Hygiene | ⚪ Low | Consolidate requirements files |
-| 21 | Hygiene | ⚪ Low | Clarify `plugin_requirements.txt` |
-| 22 | Hygiene | ⚪ Low | Pin dependency versions consistently |
-| 23 | Documentation | 📝 Low | Replace placeholder repository URLs |
-| 24 | Documentation | 📝 Low | Advertise auto-generated API docs |
-| 25 | Documentation | 📝 Low | Document Runway API integration status |
+| # | Category | Priority | Recommendation | Status |
+|---|----------|----------|----------------|--------|
+| 1 | Security | 🔴 Critical | Remove exposed API key from `.env.example` | ✅ Done |
+| 2 | Security | 🔴 Critical | Restrict CORS origins | ✅ Done |
+| 3 | Security | 🔴 Critical | Implement authentication | ✅ Done |
+| 4 | Security | 🔴 Critical | Add rate limiting | ✅ Done |
+| 5 | Security | 🔴 Critical | Enforce file upload constraints | ✅ Done |
+| 6 | Bug | 🟠 High | Fix broken import in `server.py` | ✅ Done |
+| 7 | Bug | 🟠 High | Replace deprecated `datetime.utcnow()` | ✅ Done |
+| 8 | Bug | 🟠 High | Handle missing environment variables | ✅ Done |
+| 9 | Code Quality | 🟡 Medium | Store background task references | ✅ Done |
+| 10 | Code Quality | 🟡 Medium | Add a health check endpoint | ✅ Done |
+| 11 | Code Quality | 🟡 Medium | Use consistent error response format | ✅ Done |
+| 12 | Code Quality | 🟡 Medium | Replace deprecated `@app.on_event()` | ✅ Done |
+| 13 | Code Quality | 🟡 Medium | Separate backend code into modules | ✅ Done |
+| 14 | Testing | 🔵 Medium | Add unit tests using `TestClient` | ✅ Done |
+| 15 | Testing | 🔵 Medium | Add frontend tests | ✅ Done |
+| 16 | Testing | 🔵 Medium | Populate the `tests/` directory | ✅ Done |
+| 17 | Performance | 🟢 Low | Add MongoDB indexes | ✅ Done |
+| 18 | Performance | 🟢 Low | Enforce pagination limits | ✅ Done |
+| 19 | Performance | 🟢 Low | Cache static responses | ✅ Done |
+| 20 | Hygiene | ⚪ Low | Consolidate requirements files | ✅ Done |
+| 21 | Hygiene | ⚪ Low | Clarify `plugin_requirements.txt` | ✅ Done |
+| 22 | Hygiene | ⚪ Low | Pin dependency versions consistently | ✅ Done |
+| 23 | Documentation | 📝 Low | Replace placeholder repository URLs | ✅ Done |
+| 24 | Documentation | 📝 Low | Advertise auto-generated API docs | ✅ Done |
+| 25 | Documentation | 📝 Low | Document Runway API integration status | ✅ Done |

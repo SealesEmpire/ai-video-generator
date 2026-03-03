@@ -19,7 +19,7 @@ A full-stack web application that converts text prompts or image uploads into AI
 - **Backend**: FastAPI + Python
 - **Database**: MongoDB
 - **File Storage**: Local uploads directory
-- **Authentication**: JWT-based (ready for implementation)
+- **Authentication**: JWT-based (register / login endpoints)
 - **Payments**: Stripe integration ready
 
 ## 📁 Project Structure
@@ -29,18 +29,33 @@ ai-video-generator/
 ├── frontend/                 # React frontend
 │   ├── src/
 │   │   ├── App.js           # Main application component
+│   │   ├── App.test.js      # Frontend tests
 │   │   ├── App.css          # Tailwind + custom styles
 │   │   └── index.js         # React entry point
 │   ├── public/              # Static assets
 │   ├── package.json         # Frontend dependencies
 │   ├── tailwind.config.js   # Tailwind configuration
-│   └── .env                 # Frontend environment variables
+│   └── .env.example         # Frontend environment template
 ├── backend/                 # FastAPI backend
-│   ├── server.py           # Main FastAPI application
+│   ├── server.py           # Application entry-point / assembly
+│   ├── config.py           # Environment configuration
+│   ├── models.py           # Pydantic request/response models
+│   ├── routes/             # API route handlers
+│   │   ├── auth.py         # Registration & login
+│   │   ├── health.py       # Health check
+│   │   ├── styles.py       # Video styles
+│   │   └── videos.py       # Video generation & gallery
+│   ├── services/           # Business logic
+│   │   ├── auth_service.py # JWT & password hashing
+│   │   └── video_service.py# Video generation simulation
+│   ├── api/                # External API integrations
+│   │   └── api_runway.py   # RunwayML integration (WIP)
 │   ├── requirements.txt    # Python dependencies
-│   ├── uploads/            # File upload directory
-│   └── .env               # Backend environment variables
+│   ├── .env.example        # Backend environment template
+│   └── uploads/            # File upload directory
 ├── tests/                  # Test files
+│   ├── conftest.py         # Test configuration
+│   └── test_api.py         # Backend API tests (23 tests)
 └── README.md              # This file
 ```
 
@@ -55,7 +70,7 @@ ai-video-generator/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ai-video-generator.git
+git clone https://github.com/SealesEmpire/ai-video-generator.git
 cd ai-video-generator
 ```
 
@@ -168,10 +183,21 @@ docker-compose up --build
 - `GET /api/videos` - Get user's video gallery
 - `GET /api/styles` - Get available video styles
 
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login and receive a JWT
+
+### Runway ML (Work-in-Progress)
+- `POST /api/runway/generate` - Generate video via RunwayML (requires API key)
+
 ### System
 - `GET /api/` - Health check
-- `POST /api/status` - Create status check
-- `GET /api/status` - Get status checks
+
+### Interactive API Documentation
+
+FastAPI auto-generates interactive docs:
+- **Swagger UI**: http://localhost:8001/docs
+- **ReDoc**: http://localhost:8001/redoc
 
 ## 🔐 Environment Variables
 
@@ -196,12 +222,12 @@ REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
 ## 🔮 Future Integrations (Ready to Implement)
 
 ### Video Generation APIs
-- **RunwayML**: Text-to-video and image-to-video generation
+- **RunwayML**: Placeholder integration exists in `backend/api/api_runway.py` with a `/api/runway/generate` endpoint. Requires a valid `RUNWAYML_API_KEY` in the environment. Currently returns a 503 when no key is configured.
 - **Pika Labs**: High-quality video generation
 - **Stability AI**: Video diffusion models
 
 ### Authentication & Payments
-- **JWT Authentication**: User signup, login, logout
+- **JWT Authentication**: User signup and login implemented; token-protected endpoints ready
 - **Stripe Integration**: Premium subscriptions for NSFW content
 - **Admin Controls**: Creator whitelist for unlimited access
 
@@ -216,10 +242,10 @@ REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
 
 Run the test suite:
 ```bash
-# Backend API tests
-python backend_test.py
+# Backend API tests (23 tests using FastAPI TestClient)
+python -m pytest tests/ -v
 
-# Frontend tests (when implemented)
+# Frontend tests
 cd frontend && yarn test
 ```
 
@@ -233,10 +259,11 @@ The application is fully responsive and works on:
 
 ## 🔒 Security Features
 
-- CORS properly configured
-- File upload validation
+- CORS restricted to configured origins (`ALLOWED_ORIGINS`)
+- JWT authentication (register / login)
+- File upload validation (type, size, extension)
+- Rate limiting via slowapi
 - Input sanitization
-- Rate limiting ready
 - HTTPS deployment ready
 
 ## 🎨 Customization
@@ -281,8 +308,9 @@ For issues and questions:
 ## 🔄 Version History
 
 - v1.0.0 - Initial release with stubbed video generation
-- v1.1.0 - Real API integration (coming soon)
-- v1.2.0 - Authentication & payments (coming soon)
+- v1.1.0 - Security hardening, JWT auth, rate limiting, modular backend, test suite
+- v1.2.0 - Real API integration (coming soon)
+- v1.3.0 - Stripe payments (coming soon)
 
 ---
 
