@@ -173,7 +173,10 @@ async def generate_image_to_video(
     video_id = str(uuid.uuid4())
     
     # Save uploaded file
-    file_extension = file.filename.split('.')[-1] if file.filename and '.' in file.filename else 'jpg'
+    ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+    file_extension = file.filename.split('.')[-1].lower() if file.filename and '.' in file.filename else 'jpg'
+    if file_extension not in ALLOWED_IMAGE_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="Unsupported image format. Allowed: jpg, jpeg, png, gif, webp")
     filename = f"{video_id}.{file_extension}"
     file_path = uploads_dir / filename
     

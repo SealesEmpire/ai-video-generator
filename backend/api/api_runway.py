@@ -1,5 +1,6 @@
 # backend/api/api_runway.py
 
+import asyncio
 import requests
 import os
 from dotenv import load_dotenv
@@ -46,9 +47,9 @@ def generate_video(prompt, image_url=None):
 async def runway_generate(request: RunwayGenerateRequest):
     """Generate video using Runway API"""
     if not RUNWAYML_API_KEY:
-        raise HTTPException(status_code=500, detail="Runway API key not configured")
+        raise HTTPException(status_code=500, detail="RUNWAYML_API_KEY environment variable is not configured")
     try:
-        result = generate_video(request.prompt, request.image_url)
+        result = await asyncio.to_thread(generate_video, request.prompt, request.image_url)
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
