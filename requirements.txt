@@ -1,5 +1,2 @@
-fastapi
-python-dotenv
-motor
-aiohttp
-uvicorn
+# Backend dependencies – canonical list lives in backend/requirements.txt
+-r backend/requirements.txt
