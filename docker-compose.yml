@@ -20,7 +20,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        REACT_APP_BACKEND_URL: http://localhost:8001
+        # For local dev this points to the host machine's port.
+        # Override with your production URL when deploying:
+        #   docker compose build --build-arg REACT_APP_BACKEND_URL=https://api.example.com
+        REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL:-http://localhost:8001}
     ports:
       - "3000:3000"
     depends_on:

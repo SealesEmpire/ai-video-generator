@@ -12,6 +12,9 @@ on:
           - production
           - staging
 
+permissions:
+  contents: read
+
 jobs:
   deploy-backend:
     runs-on: ubuntu-latest

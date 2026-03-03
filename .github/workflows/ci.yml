@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   # -------- Backend tests --------
   backend:
@@ -25,7 +28,6 @@ jobs:
 
       - name: Run tests
         run: python -m pytest ../tests/ -v
-        working-directory: backend
 
   # -------- Frontend build --------
   frontend:

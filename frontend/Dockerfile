@@ -4,6 +4,8 @@ FROM node:18-alpine AS build
 WORKDIR /app
 
 COPY package.json ./
+# --legacy-peer-deps is needed because react-scripts 5 declares peer deps
+# that conflict with React 19; this is safe for CRA-based projects.
 RUN npm install --legacy-peer-deps
 
 COPY . .
