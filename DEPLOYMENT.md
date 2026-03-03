@@ -45,49 +45,31 @@ heroku config:set MONGO_URL=your-mongodb-url
 git push heroku main
 ```
 
-### Docker Deployment
+### Docker Deployment (Recommended)
 
-**1. Create Docker Compose:**
-```yaml
-version: '3.8'
-services:
-  backend:
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8001:8001"
-    environment:
-      - MONGO_URL=mongodb://mongo:27017
-      - DB_NAME=ai_video_generator
-    depends_on:
-      - mongo
-    
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_BACKEND_URL=http://localhost:8001
-    depends_on:
-      - backend
-    
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+The repository includes production-ready Dockerfiles and a `docker-compose.yml`.
 
-volumes:
-  mongo_data:
+**1. Quick Start:**
+```bash
+# Clone and deploy in one command
+docker compose up --build -d
 ```
 
-**2. Deploy:**
+This starts three containers:
+- **backend** – FastAPI on port 8001
+- **frontend** – React (via nginx) on port 3000
+- **mongo** – MongoDB on port 27017
+
+**2. Custom Configuration:**
 ```bash
-docker-compose up --build -d
+# Set a production JWT secret
+JWT_SECRET=my-super-secret docker compose up --build -d
+```
+
+**3. Production Build with Custom Backend URL:**
+```bash
+docker compose build --build-arg REACT_APP_BACKEND_URL=https://api.yourdomain.com
+docker compose up -d
 ```
 
 ## 🛠️ Platform-Specific Instructions

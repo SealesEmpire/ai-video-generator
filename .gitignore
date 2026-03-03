@@ -65,10 +65,8 @@ coverage/
 # Documentation
 docs/_build/
 
-# Docker
-.dockerignore
-Dockerfile
-docker-compose.yml
+# Docker (volumes / runtime data only – config files are committed)
+docker-data/
 
 # Misc
 *.tgz

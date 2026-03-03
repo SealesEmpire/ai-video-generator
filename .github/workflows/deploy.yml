@@ -1,0 +1,66 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "production"
+        type: choice
+        options:
+          - production
+          - staging
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build backend Docker image
+        run: docker build -t ai-video-backend:${{ github.sha }} ./backend
+
+      # ---- Add your deployment target here ----
+      # Examples (uncomment the one you use):
+      #
+      # --- Railway ---
+      # - name: Deploy to Railway
+      #   uses: bervProject/railway-deploy@main
+      #   with:
+      #     railway_token: ${{ secrets.RAILWAY_TOKEN }}
+      #     service: backend
+      #
+      # --- Render ---
+      # - name: Trigger Render deploy
+      #   run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+      #
+      # --- Fly.io ---
+      # - uses: superfly/flyctl-actions/setup-flyctl@master
+      # - run: flyctl deploy --remote-only
+      #   env:
+      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Deployment ready
+        run: echo "Backend image built. Add your deployment target above."
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # ---- Vercel deployment ----
+      # Uncomment to deploy to Vercel:
+      # - name: Deploy to Vercel
+      #   uses: amondnet/vercel-action@v25
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     working-directory: ./frontend
+      #     vercel-args: '--prod'
+
+      - name: Deployment ready
+        run: echo "Frontend ready. Add your deployment target above."
