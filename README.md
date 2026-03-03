@@ -2,6 +2,43 @@
 
 A full-stack web application that converts text prompts or image uploads into AI-generated videos. Built with React, FastAPI, and MongoDB.
 
+## 🌐 Deployment Status & Access
+
+> **Status:** The project is **not yet deployed** to a public URL. All deployment infrastructure (Dockerfiles, CI/CD, platform configs) is in place and ready to use.
+
+### Quick Access — Run Locally with Docker
+
+The fastest way to run the full application:
+
+```bash
+git clone https://github.com/SealesEmpire/ai-video-generator.git
+cd ai-video-generator
+docker compose up --build -d
+```
+
+Once running, open:
+
+| Service   | URL                          |
+|-----------|------------------------------|
+| Frontend  | http://localhost:3000        |
+| Backend API | http://localhost:8001      |
+| API Docs (Swagger) | http://localhost:8001/docs |
+| API Docs (ReDoc) | http://localhost:8001/redoc |
+
+To stop: `docker compose down`
+
+### Deploy to the Cloud
+
+Ready-to-use configs are included for several platforms — see [DEPLOYMENT.md](DEPLOYMENT.md) for full instructions:
+
+| Platform | Config File | What it deploys |
+|----------|-------------|-----------------|
+| **Docker** (any server) | `docker-compose.yml` | Full stack + MongoDB |
+| **Render** | `render.yaml` | Backend + static frontend |
+| **Vercel** | `vercel.json` | Frontend only |
+| **Heroku / Railway** | `Procfile` | Backend only |
+| **GitHub Actions** | `.github/workflows/deploy.yml` | CI/CD pipeline (targets commented — uncomment your provider) |
+
 ## 🚀 Features
 
 - **Text-to-Video**: Generate videos from text prompts with multiple style options

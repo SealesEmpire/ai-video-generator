@@ -2,6 +2,16 @@
 
 This document provides detailed instructions for deploying the AI Video Generator to various platforms.
 
+> **Current status:** The project is **not yet deployed** to a live public URL. The deployment configuration files below are ready to use — pick a platform, configure your environment variables, and deploy.
+
+## 🏃 Fastest Local Deploy (Docker)
+
+```bash
+docker compose up --build -d
+```
+
+Then open http://localhost:3000 (frontend) and http://localhost:8001/docs (API docs).
+
 ## 🚀 Quick Deploy Options
 
 ### Vercel (Frontend) + Railway (Backend)
