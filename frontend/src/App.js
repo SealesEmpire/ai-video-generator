@@ -387,7 +387,7 @@ const VideoGeneratorApp = () => {
                     <div className="p-4 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium capitalize">
-                          {video.style.replace('_', ' ')}
+                          {video.style.replaceAll('_', ' ')}
                         </span>
                         <span className="text-xs text-gray-400">
                           {video.duration}s
