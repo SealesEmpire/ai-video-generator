@@ -18,6 +18,7 @@ A full-stack web application that converts text prompts or image uploads into AI
 - **Frontend**: React 19 + Tailwind CSS
 - **Backend**: FastAPI + Python
 - **Database**: MongoDB
+- **Mobile**: Capacitor (iOS & Android native shells)
 - **File Storage**: Local uploads directory
 - **Authentication**: JWT-based (ready for implementation)
 - **Payments**: Stripe integration ready
@@ -223,7 +224,26 @@ python backend_test.py
 cd frontend && yarn test
 ```
 
-## 📱 Mobile Support
+## 📱 Mobile App (iOS & Android)
+
+The app is configured with [Capacitor](https://capacitorjs.com/) for native iOS and Android builds.
+
+### Quick Start
+```bash
+cd frontend
+
+# Build web app and sync to native platforms
+npm run cap:build
+
+# Open in Xcode (iOS) or Android Studio (Android)
+npm run cap:open:ios
+npm run cap:open:android
+```
+
+### App Store Submission
+See **[APP_STORE_GUIDE.md](APP_STORE_GUIDE.md)** for full instructions on building and submitting to the Apple App Store and Google Play Store.
+
+### Mobile Support
 
 The application is fully responsive and works on:
 - Mobile phones (iOS/Android)
