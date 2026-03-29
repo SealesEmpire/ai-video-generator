@@ -13,15 +13,15 @@ from datetime import datetime
 import shutil
 import asyncio
 import random
-from api_runway import router as runway_router
+from api.api_runway import router as runway_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.environ.get('DB_NAME', 'ai_video_generator')]
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -167,13 +167,16 @@ async def generate_image_to_video(
     nsfw_enabled: bool = Form(False)
 ):
     """Generate video from uploaded image"""
-    if not file.content_type.startswith('image/'):
+    if not file.content_type or not file.content_type.startswith('image/'):
         raise HTTPException(status_code=400, detail="File must be an image")
     
     video_id = str(uuid.uuid4())
     
     # Save uploaded file
-    file_extension = file.filename.split('.')[-1] if '.' in file.filename else 'jpg'
+    ALLOWED_IMAGE_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif', 'webp'}
+    file_extension = file.filename.split('.')[-1].lower() if file.filename and '.' in file.filename else 'jpg'
+    if file_extension not in ALLOWED_IMAGE_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="Unsupported image format. Allowed: jpg, jpeg, png, gif, webp")
     filename = f"{video_id}.{file_extension}"
     file_path = uploads_dir / filename
     

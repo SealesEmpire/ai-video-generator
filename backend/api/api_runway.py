@@ -1,18 +1,30 @@
-# backend/api_runway.py
+# backend/api/api_runway.py
 
+import asyncio
 import requests
 import os
 from dotenv import load_dotenv
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from typing import Optional
 
 load_dotenv()  # Load variables from .env file
 
-RUNWAY_API_KEY = os.getenv("RUNWAY_API_KEY")
+RUNWAYML_API_KEY = os.getenv("RUNWAYML_API_KEY")
+
+router = APIRouter()
+
+
+class RunwayGenerateRequest(BaseModel):
+    prompt: str
+    image_url: Optional[str] = None
+
 
 def generate_video(prompt, image_url=None):
     url = "https://api.runwayml.com/v1/generate"
 
     headers = {
-        "Authorization": f"Bearer {RUNWAY_API_KEY}",
+        "Authorization": f"Bearer {RUNWAYML_API_KEY}",
         "Content-Type": "application/json"
     }
 
@@ -29,3 +41,15 @@ def generate_video(prompt, image_url=None):
         return response.json()
     else:
         raise Exception(f"Runway API error: {response.text}")
+
+
+@router.post("/generate")
+async def runway_generate(request: RunwayGenerateRequest):
+    """Generate video using Runway API"""
+    if not RUNWAYML_API_KEY:
+        raise HTTPException(status_code=500, detail="RUNWAYML_API_KEY environment variable is not configured")
+    try:
+        result = await asyncio.to_thread(generate_video, request.prompt, request.image_url)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
